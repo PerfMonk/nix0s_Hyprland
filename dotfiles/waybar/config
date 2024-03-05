@@ -1,0 +1,213 @@
+ 
+// vim:ft=json
+
+{
+	"layer": "top",
+	"position": "top",
+
+	"modules-left": [
+          "custom/rofi",
+          "custom/right-arrow-dark",
+          "custom/arquivos",
+          "custom/firefox",
+          "custom/terminal",
+          "custom/right-arrow-dark",
+	  "hyprland/workspaces"
+	],
+	"modules-center": [
+		"clock",
+    		"custom/weather"
+	],
+	"modules-right": [
+        	"custom/media",
+        	"network",
+		"custom/storage",
+		"cpu",
+		"memory",
+        	"idle_inhibitor",
+		"backlight",
+		"pulseaudio",
+        	"temperature",
+		"battery",
+		"tray",
+        	"custom/desligar"
+	],
+	"custom/left-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-dark": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-light": {
+		"format": "",
+		"tooltip": false
+	},
+	"custom/rofi": {
+		"format": " Menu",
+        "on-click-right": "nwg-drawer",
+        "on-click": "wofi --show drun",
+        "on-click-middle": "pkill -9 rofi"
+    	},
+    	"custom/terminal": {
+		"format": "",
+        "on-click": "kitty",
+        "on-click-middle": "pkill -9 kitty"
+    	},
+    	"custom/arquivos": {
+		"format": "",
+        "on-click": "nemo",
+        "on-click-right": "alacritty -e ranger",
+        "on-click-middle": "bash -c 'pkill -9 caja ; pkill -9 ranger'"
+    	},
+    	"custom/firefox": {
+		"format": "",
+        "on-click": "firefox",
+        "on-click-right": "firefox --new-tab",
+        "on-click-middle": "firefox --private-window"
+    	},
+	"hyprland/workspaces": {
+       	  "disable-scroll": false,
+	  "all-outputs": true,
+	  "on-click": "activate",
+	  "format": "{icon}",
+          "on-scroll-up": "hyprctl dispatch workspace e+1",
+          "on-scroll-down": "hyprctl dispatch workspace e-1"
+	},
+        "sway/window": {
+          "max-length": 80,
+          "tooltip": false
+        },
+	"clock": {
+		"format": " {:%H:%M:%S %p}",
+		"tooltip": false,
+        "on-click": "osmo"
+	},
+
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-bluetooth": "{icon}  {volume}%",
+		"format-muted": "MUTE",
+        "format-source":  " {volume}%",
+        "format-source-muted": "MUTE",
+		"format-icons": {
+			"headphones": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+			"default": [
+				"",
+				""
+			]
+		},
+		"scroll-step": 5,
+        "on-click": "pavucontrol",
+		"on-click-right": "pavucontrol"
+	},
+    "temperature": {
+        "interval": 2,
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": " {temperatureC}°C",
+        "format": " {temperatureC}°C",
+        "on-click": "xsensors"
+	},
+    "cpu": {
+        "interval": 10,
+        "format": " {}%"
+    },
+    "memory": {
+        "interval": 30,
+        "format": " {used:0.2f} / {total:0.0f} GB",
+        "on-click": "alacritty -e htop"
+    },
+    "battery": {
+        "interval": 2,
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+    "network": {
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": " {ifname}: {ipaddr}/{cidr}",
+        "format": "",
+		"format-disconnected": "",
+        "on-click": "wl-copy $(ip address show up scope global | grep inet | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c5-)",
+        "on-click-right": "wl-copy $(ip address show up scope global | grep inet6 | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c6-)",
+        "tooltip-format": " {bandwidthUpBits}  {bandwidthDownBits}\n{ifname}\n{ipaddr}/{cidr}\n",
+        "tooltip-format-wifi": " {essid} {frequency}MHz\nStrength: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}/{cidr}\n {bandwidthUpBits}  {bandwidthDownBits}",
+        "interval": 10
+    },
+    "custom/storage": {
+        "format": " {}",
+        "format-alt": "{percentage}% ",
+        "format-alt-click": "click-right",
+        "return-type": "json",
+        "interval": 60,
+        "exec": "~/.config/waybar/modules/storage.sh"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-alt": "{percent}% {icon}",
+        "format-alt-click": "click-right",
+        //"format-icons": ["", ""],
+        "format-icons": ["", ""],
+        "on-scroll-down": "brightnessctl s 5%-",
+        "on-scroll-up": "brightnessctl s +5%"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}idle",
+        "format-icons": {
+            "activated": "☼",
+            "deactivated": "☀"
+        }
+    },
+    "custom/weather": {
+        "format": "{}",
+        "format-alt": "{alt}: {}",
+        "format-alt-click": "click-right",
+        "interval": 1800,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/weather.sh",
+        "exec-if": "ping wttr.in -c1"
+    },
+        "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py --player vlc 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "custom/desligar": {
+    "format": "",
+    "on-click": "wlogout -p layer-shell"
+    },
+	"tray": {
+		"icon-size": 15
+	}
+}
