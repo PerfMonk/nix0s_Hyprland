@@ -57,6 +57,7 @@
   programs.hyprland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   xdg.portal = { enable = true; extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ]; };
+  xdg.portal.config.common.default = "gtk";
 
   # Configure keymap in X11
   services.xserver = {
@@ -90,6 +91,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
+  # Install flatpak service (gtk portal is required for flatpak apps)
+
+   services.flatpak.enable = true;
+
    nixpkgs.config.permittedInsecurePackages = [ "freeimage-unstable-2021-11-01" ];
 
 
@@ -104,7 +109,6 @@
       brightnessctl
       budgie.budgie-desktop-with-plugins
       cava
-      digikam
       dunst
       fastfetch
       fira-code
@@ -113,7 +117,6 @@
       font-awesome
       fontconfig
       geany
-      gimp-with-plugins
       git
       glances
       gnome.adwaita-icon-theme
@@ -126,7 +129,6 @@
       inxi
       jetbrains-mono
       kitty
-      libreoffice-bin
       mate.mate-icon-theme
       mate.mate-icon-theme-faenza
       meslo-lgs-nf
