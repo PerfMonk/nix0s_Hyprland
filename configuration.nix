@@ -52,7 +52,7 @@
   services.xserver.enable = true;
 
   # Enable the BUDGIE Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true ;
+  services.xserver.displayManager.sddm.enable = true ;
   services.xserver.desktopManager.budgie.enable = true;
   programs.hyprland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -104,13 +104,16 @@
       brightnessctl
       budgie.budgie-desktop-with-plugins
       cava
+      digikam
       dunst
+      fastfetch
       fira-code
       fira-code-symbols
       firefox
       font-awesome
       fontconfig
       geany
+      gimp-with-plugins
       git
       glances
       gnome.adwaita-icon-theme
@@ -123,11 +126,11 @@
       inxi
       jetbrains-mono
       kitty
+      libreoffice-bin
       mate.mate-icon-theme
       mate.mate-icon-theme-faenza
       meslo-lgs-nf
       mpvpaper
-      neofetch
       nerdfonts
       noto-fonts
       noto-fonts-cjk
