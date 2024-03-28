@@ -127,6 +127,7 @@
       htop
       hyprpaper
       inxi
+      inter
       jetbrains-mono
       kitty
       mate.mate-icon-theme
