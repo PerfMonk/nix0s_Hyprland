@@ -52,12 +52,14 @@
   services.xserver.enable = true;
 
   # Enable the BUDGIE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true ;
+  services.displayManager.sddm.enable = true ;
+  services.displayManager.sddm.wayland.enable = true ;
   services.xserver.desktopManager.budgie.enable = true;
   programs.hyprland.enable = true;
+###  programs.hyprland.envVars.enable = false;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   xdg.portal = { enable = true; extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ]; };
-  xdg.portal.config.common.default = "gtk";
+  xdg.portal.config.common.default = "hyprland";
 
   # Configure keymap in X11
   services.xserver = {
@@ -66,7 +68,7 @@
   };
 
   # Configure console keymap
-  console.keyMap = "cf";
+  console.keyMap = "ca";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -89,7 +91,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Install flatpak service (gtk portal is required for flatpak apps)
 
@@ -114,6 +116,7 @@
       fira-code
       fira-code-symbols
       firefox
+      floorp
       font-awesome
       fontconfig
       geany
@@ -124,6 +127,7 @@
       grim
       gsimplecal
       gtk-engine-murrine
+      gobject-introspection
       htop
       hyprpaper
       inxi
@@ -133,6 +137,8 @@
       mate.mate-icon-theme
       mate.mate-icon-theme-faenza
       meslo-lgs-nf
+      mpv
+      mpvScripts.mpris
       mpvpaper
       nerdfonts
       noto-fonts
@@ -150,6 +156,7 @@
       psmisc
       python3
       python311Packages.pip
+      python311Packages.pygobject3
       pywal	
       ranger
       roboto
@@ -216,7 +223,9 @@
     pkgs.megasync
     pkgs.libsForQt5.polkit-kde-agent
     pkgs.polkit
+    pkgs.polkit_gnome
     tlp
+    borgbackup
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -254,7 +263,7 @@
   nix.gc = {
                 automatic = true;
                 dates = "monthly";
-                options = "--delete-older-than 4w";
+                options = "--delete-older-than 28d";
         };
 
   # This value determines the NixOS release from which the default
