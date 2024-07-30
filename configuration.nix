@@ -74,7 +74,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
+###  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -101,6 +101,7 @@
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  #### commenté: budgie.budgie-desktop-with-plugins
   users.users.bt = {
     isNormalUser = true;
     description = "Bernard Tremblay";
@@ -109,20 +110,16 @@
       alacritty
       binutils
       brightnessctl
-      budgie.budgie-desktop-with-plugins
       cava
-      dunst
       fastfetch
       fira-code
       fira-code-symbols
-      firefox
-      floorp
       font-awesome
       fontconfig
       geany
       git
       glances
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       google-chrome
       grim
       gsimplecal
@@ -165,6 +162,7 @@
       source-code-pro
       swayidle
       swaylock
+      swaynotificationcenter
       swww
       twemoji-color-font
       terminus_font_ttf
@@ -258,6 +256,12 @@
   networking.firewall.allowedUDPPorts = [ 22 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  fileSystems."/mnt/backup" = {
+    device = "/dev/data/backup";
+    fsType = "auto";
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show"];
+    };
 
   # Automatic Garbage Collection
   nix.gc = {
